@@ -1,0 +1,41 @@
+{
+  "case_studies": {
+    "A \u2014 SSL vs supervised-only": {
+      "ssl_f1": 0.7451,
+      "supervised_only_f1": 0.6667,
+      "ssl_sensitivity": 0.7308,
+      "supervised_only_sensitivity": 0.6154,
+      "delta_f1_ssl_minus_sup": 0.0784
+    },
+    "B \u2014 Conformal coverage": {
+      "target_coverage": 0.9,
+      "empirical_coverage": 0.9535,
+      "avg_set_size": 1.6512,
+      "singleton_rate": 0.3488,
+      "n": 43,
+      "q_diagnostic_ok": true,
+      "qhat": 0.8844
+    },
+    "C \u2014 Fairness gap illustration": {
+      "gaps_before": {
+        "sensitivity": 0.1905,
+        "ppv": 0.0192,
+        "f1": 0.1077
+      },
+      "gaps_after_reweight": {
+        "sensitivity": 0.119,
+        "ppv": 0.0,
+        "f1": 0.0593
+      },
+      "groups_before": [
+        "A",
+        "B"
+      ]
+    }
+  },
+  "ssl_loss_history": [
+    2.9618446892733368,
+    3.128364581718673
+  ],
+  "disclaimer": "NOT A MEDICAL DEVICE. NOT FOR CLINICAL USE, DIAGNOSIS, OR TREATMENT. Research and education demo only. All signals are fully synthetic."
+}

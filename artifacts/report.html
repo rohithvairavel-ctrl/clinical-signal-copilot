@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Clinical Signal Copilot — Research Report</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; }
+.banner { background: #7f1d1d; color: #fff; padding: 1rem; border-radius: 8px; font-weight: 600; }
+pre { white-space: pre-wrap; background: #f8fafc; padding: 1rem; border-radius: 8px; }
+</style>
+</head>
+<body>
+<div class="banner">NOT A MEDICAL DEVICE. NOT FOR CLINICAL USE, DIAGNOSIS, TRIAGE, OR TREATMENT. This is a research / education decision-aid demo on fully synthetic signals. Do not use on real patients or clinical workflows.</div>
+<pre># Clinical Signal Copilot — Research Report<br>
+<br>
+&gt; **DISCLAIMER:** NOT A MEDICAL DEVICE. NOT FOR CLINICAL USE, DIAGNOSIS, TRIAGE, OR TREATMENT. This is a research / education decision-aid demo on fully synthetic signals. Do not use on real patients or clinical workflows.<br>
+<br>
+## Signal quality (SQI)<br>
+<br>
+- **mean_sqi**: 0.7073<br>
+- **min_sqi**: 0.5296<br>
+- **frac_low_sqi_&lt;0.4**: 0.0<br>
+- **n_test_windows**: 43<br>
+<br>
+## Detection metrics<br>
+<br>
+- **ssl**: {&#x27;tp&#x27;: 19, &#x27;fp&#x27;: 6, &#x27;fn&#x27;: 7, &#x27;sensitivity&#x27;: 0.7307692307692027, &#x27;ppv&#x27;: 0.7599999999999697, &#x27;f1&#x27;: 0.7450980392151573}<br>
+- **supervised_only**: {&#x27;tp&#x27;: 16, &#x27;fp&#x27;: 6, &#x27;fn&#x27;: 10, &#x27;sensitivity&#x27;: 0.6153846153845918, &#x27;ppv&#x27;: 0.7272727272726943, &#x27;f1&#x27;: 0.6666666666661424}<br>
+<br>
+## Conformal risk sets<br>
+<br>
+- **target_coverage**: 0.9000<br>
+- **empirical_coverage**: 0.9535<br>
+- **avg_set_size**: 1.6512<br>
+- **singleton_rate**: 0.3488<br>
+- **n**: 43<br>
+- **q_diagnostic_ok**: True<br>
+<br>
+_Interpretation:_ set size &gt; 1 means the model abstains to a risk set; do not treat singleton predictions as clinical ground truth.<br>
+<br>
+## Subgroup fairness<br>
+<br>
+### Metric gaps (max − min across synthetic subgroups)<br>
+- **sensitivity gap**: 0.1905<br>
+- **ppv gap**: 0.0192<br>
+- **f1 gap**: 0.1077<br>
+### Group `A` (n=19)<br>
+- sensitivity: 0.8333<br>
+- ppv: 0.7692<br>
+- f1: 0.8000<br>
+### Group `B` (n=24)<br>
+- sensitivity: 0.6429<br>
+- ppv: 0.7500<br>
+- f1: 0.6923<br>
+<br>
+**Caveat:** subgroups are synthetic attributes for demo disparity diagnostics only — not real race/sex/age or clinical cohorts.<br>
+<br>
+## Case studies<br>
+<br>
+### A — SSL vs supervised-only<br>
+- **ssl_f1**: 0.7451<br>
+- **supervised_only_f1**: 0.6667<br>
+- **ssl_sensitivity**: 0.7308<br>
+- **supervised_only_sensitivity**: 0.6154<br>
+- **delta_f1_ssl_minus_sup**: 0.0784<br>
+<br>
+### B — Conformal coverage<br>
+- **target_coverage**: 0.9<br>
+- **empirical_coverage**: 0.9535<br>
+- **avg_set_size**: 1.6512<br>
+- **singleton_rate**: 0.3488<br>
+- **n**: 43<br>
+- **q_diagnostic_ok**: True<br>
+- **qhat**: 0.8844<br>
+<br>
+### C — Fairness gap illustration<br>
+- **gaps_before**: {&#x27;sensitivity&#x27;: 0.1905, &#x27;ppv&#x27;: 0.0192, &#x27;f1&#x27;: 0.1077}<br>
+- **gaps_after_reweight**: {&#x27;sensitivity&#x27;: 0.119, &#x27;ppv&#x27;: 0.0, &#x27;f1&#x27;: 0.0593}<br>
+- **groups_before**: [&#x27;A&#x27;, &#x27;B&#x27;]<br>
+<br>
+<br>
+## Notes<br>
+<br>
+- All signals are fully synthetic (PhysioNet-style morphology, no real recordings).<br>
+- SSL uses SimCLR/CLOCS-style temporal+channel views with NT-Xent (numpy encoder).<br>
+- Conformal guarantees assume exchangeability — violated under distribution shift.<br>
+- Fairness mitigation is a sketch (sample reweighting), not a clinical fairness solution.<br>
+<br>
+---<br>
+*NOT A MEDICAL DEVICE. NOT FOR CLINICAL USE, DIAGNOSIS, TRIAGE, OR TREATMENT. This is a research / education decision-aid demo on fully synthetic signals. Do not use on real patients or clinical workflows.*<br>
+</pre>
+</body>
+</html>
